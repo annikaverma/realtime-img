@@ -1,10 +1,9 @@
-
 function setup() {
   canvas = createCanvas(300, 300);
   canvas.center();
   video = createCapture(VIDEO);
   video.hide();
-  classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/model.json',modelLoaded);
+  classifier = ml5.imageClassifier('MobileNet',modelLoaded);
 }
 
 function modelLoaded() {
@@ -16,12 +15,12 @@ function draw() {
   classifier.classify(video, gotResult);
 }
 
-function gotResult(erro, results) {
+function gotResult(error, results) {
   if (error) {
-    console.erroe(error);
+    console.error(error);
   } else {
     console.log(results);
-    document.getElementById("result_objects_name").innerHTML = results[0].label;
-    document.getElementById("result_objects_accuracy").innerHTML = results[0].confidence.toFixed(3);
+    document.getElementById("result_object_name").innerHTML = results[0].label;
+    document.getElementById("result_object_accuracy").innerHTML = results[0].confidence.toFixed(3);
   }
 }
